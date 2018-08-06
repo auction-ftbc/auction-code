@@ -13,10 +13,13 @@ module.exports = {
       { from: './app/index.html', to: "index.html" },
       { from: './app/GetHighestBidder.html', to: "GetHighestBidder.html" },
       { from: './app/buy.html', to: "buy.html" },
+      { from: './app/transferfrom.html', to: "transferFrom.html" },
       { from: './app/transfer.html', to: "transfer.html" },
       { from: './app/authorize.html', to: "authorize.html" },
       { from: './app/allowance.html', to: "allowance.html" },
       { from: './app/mint.html', to: "mint.html" },
+      { from: './app/GetBalance.html', to: "GetBalance.html" },
+      { from: './app/burn.html', to: "burn.html" },
       { from: './app/bidding.html', to: "bidding.html" }
     ])
   ],

@@ -9,7 +9,7 @@
 <script>
 window.addEventListener('load', function() {
   window.web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
-  TaskMasterApp.setWeb3TokenProvider();
+  TaskMasterApp.setWeb3Provider();
   //TaskMasterApp.getAccounts();
 });
 </script>
@@ -21,7 +21,7 @@ window.addEventListener('load', function() {
       FTBC Token
     </div>
   </div>
-<div class="tc f2 mt6 near-black">Please enter addresses to get TFBC token allowanace balance </div>
+<div class="tc f2 mt6 near-black">Please enter addresses to burn FTBC tokens </div>
  <div class="pa4 mt4 bg-white shadow-1 br2 tc mw7 center w80">
    <div class="f3 dark-green">Addresses</div>
    <form class="pt3 pb4 ph5-l black-60">
@@ -39,13 +39,13 @@ window.addEventListener('load', function() {
           class="pa3 input-reset ba b--black-30 br2 bg-white-smoke w-
                  100"
           type="text"
-          id="spender"
-          placeholder="spender address">
+          id="tokenAmount"
+          placeholder="Enter number of tokens">
       </div>
      </fieldset>
    </form>
    <button
-     class="white pa3 ph4 bg-green br2 f3 b pointer" onclick="TaskMasterApp.allowance()">->
+     class="white pa3 ph4 bg-green br2 f3 b pointer" onclick="TaskMasterApp.burnToken()">->
    </button>
 </div>
 <div id="transactionStatus" class="pt4"></div>

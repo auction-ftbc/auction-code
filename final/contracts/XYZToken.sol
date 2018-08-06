@@ -21,13 +21,15 @@ contract XYZToken is Token {
     uint256 public unitsOneEthCanBuy;     
     uint256 public totalEthInWei;         
     address public fundsWallet;         
+    address public local_from;
+    uint256 public local_value;
+    address public local_to;
 
-
-    constructor() public {
+    constructor() public payable {
         balances[msg.sender] = 1000000000000000000000;               
         totalSupply = 1000000000000000000000;                        
         name = "XYZToken";                                   
-        decimals = 18;                                               
+        decimals = 18;                                             
         symbol = "XYZ";                                             
         unitsOneEthCanBuy = 10;                                      
         fundsWallet = msg.sender;                                    
@@ -50,7 +52,16 @@ contract XYZToken is Token {
          return totalSupply;
     }
 
-function transfer(address _to, uint256 _value) returns (bool success) {
+/*function transfer(address _to, uint256 _value) returns (bool success) {
+        if (balances[msg.sender] >= _value && balances[_to] + _value > balances[_to]) {
+            balances[msg.sender] -= _value;
+            balances[_to] += _value;
+            Transfer(msg.sender, _to, _value);
+            return true;
+        } else { return false; }
+    }
+*/
+    function transfer(address _to, uint256 _value) returns (bool success) {
         if (balances[msg.sender] >= _value && balances[_to] + _value > balances[_to]) {
             balances[msg.sender] -= _value;
             balances[_to] += _value;
@@ -59,7 +70,19 @@ function transfer(address _to, uint256 _value) returns (bool success) {
         } else { return false; }
     }
 
+    function transferBetweenAccounts(address _from, address _to, uint256 _value) returns (bool success) {
+            if (balances[_from] >= _value && balances[_to] + _value > balances[_to]) {
+            balances[_to] += _value;
+            balances[_from] -= _value;
+            Transfer(_from, _to, _value);
+            return true;
+        } else { return false; }
+    }
     function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {
+        local_from = _from;
+        local_to = _to;
+        local_value = _value;
+        address local_sender = msg.sender;
         if (balances[_from] >= _value && allowed[_from][msg.sender] >= _value && balances[_to] + _value > balances[_to]) {
             balances[_to] += _value;
             balances[_from] -= _value;
@@ -70,7 +93,7 @@ function transfer(address _to, uint256 _value) returns (bool success) {
     }
 
 
-    function balanceOf(address _owner) constant returns (uint256 balance) {
+    function balanceOf(address _owner) constant returns (uint256) {
         return balances[_owner];
     }
 

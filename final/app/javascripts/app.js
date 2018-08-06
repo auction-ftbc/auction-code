@@ -1,21 +1,28 @@
 import { default as Web3} from 'web3';
 import { default as contract } from 'truffle-contract'
-import AuctionBiddingArtifacts from 'C:/blockchain/auction-app-dev/final/build/contracts/AuctionBidding.json'
+import AuctionBiddingArtifacts from 'C:/blockchain/auction-app-dev/auction-code/final/build/contracts/AuctionBidding.json'
+import AuctionTokenArtifacts from 'C:/blockchain/auction-app-dev/auction-code/final/build/contracts/XYZToken.json'
 
-var TaskMaster = contract(AuctionBiddingArtifacts);
+var AuctionBiddingTaskMaster = contract(AuctionBiddingArtifacts);
+var AuctionTokenTaskMaster = contract(AuctionTokenArtifacts);
 var ownerAccount = "0x78e45c14db8fc1de08d7589a9999bfa49956f66e";
-var contractAddress; //"0x971d0118903c87ee9b0dd21a6d2d505a5ac2f234";
+var contractAddressToken; //"0x971d0118903c87ee9b0dd21a6d2d505a5ac2f234";
+var contractAddressBidding; 
 var contractAbi;
 
 
 window.TaskMasterApp = {
   setWeb3Provider: function() {
-    TaskMaster.setProvider(web3.currentProvider);
-    TaskMaster.deployed().then(function(instance){contractAddress = instance.address});
-    
+    AuctionBiddingTaskMaster.setProvider(web3.currentProvider);
+    AuctionBiddingTaskMaster.deployed().then(function(instance){contractAddressBidding = instance.address});
 
   },
+  setWeb3TokenProvider: function() {
+    AuctionTokenTaskMaster.setProvider(web3.currentProvider);
+    AuctionTokenTaskMaster.deployed().then(function(instance){contractAddressToken = instance.address});
 
+  },
+  
   updateTransactionStatus: function(statusMessage) {
     document.getElementById("transactionStatus").innerHTML = statusMessage;
   },
@@ -23,7 +30,7 @@ window.TaskMasterApp = {
   refreshAccountBalance: function() {
     var self = this;
 
-    TaskMaster.deployed()
+    AuctionTokenTaskMaster.deployed()
       .then(function(taskMasterInstance) {
         var myAddress = document.getElementById("doer").value;
         return taskMasterInstance.balanceOf.call(myAddress, {
@@ -42,7 +49,7 @@ window.TaskMasterApp = {
   allowance: function() {
     var self = this;
 
-    TaskMaster.deployed()
+    AuctionTokenTaskMaster.deployed()
       .then(function(taskMasterInstance) {
         var myAddress = document.getElementById("doer").value;
         var spender = document.getElementById("spender").value;
@@ -62,7 +69,7 @@ window.TaskMasterApp = {
   saveBidding: function() {
     var self = this;
 
-    TaskMaster.deployed()
+    AuctionBiddingTaskMaster.deployed()
     .then(function(taskMasterInstance) {
       var bidder = document.getElementById("bidder").value;
       var auctionId = document.getElementById("auctionId").value;
@@ -80,7 +87,7 @@ window.TaskMasterApp = {
 
   getHighestBidder: function() {
     var self = this;
-    TaskMaster.deployed()
+    AuctionBiddingTaskMaster.deployed()
     .then(function(taskMasterInstance) {
       var address = document.getElementById("doer").value;
       var auctionId = document.getElementById("auctionId").value;
@@ -127,7 +134,7 @@ window.TaskMasterApp = {
 
     this.updateTransactionStatus("Transfer in progress ... ");
 
-    TaskMaster.deployed()
+    AuctionTokenTaskMaster.deployed()
       .then(function(taskMasterInstance) {
         var myEvent = taskMasterInstance.Transfer({fromBlock: 'latest', toBlock: 'latest'});
         myEvent.watch(function(error, result){if(error) {alert(error); } document.getElementById("accountBalance").innerHTML = result.args._value.toNumber(); document.getElementById("accountBalance").style.color = "white"; });
@@ -157,7 +164,7 @@ window.TaskMasterApp = {
 
     this.updateTransactionStatus("Transfer in progress ... ");
 
-    TaskMaster.deployed()
+    AuctionTokenTaskMaster.deployed()
       .then(function(taskMasterInstance) {
         var myEvent = taskMasterInstance.Transfer({fromBlock: 'latest', toBlock: 'latest'});
         myEvent.watch(function(error, result){if(error) {alert(error); } alert(result.args._value.toNumber())});
@@ -184,7 +191,7 @@ window.TaskMasterApp = {
 
     this.updateTransactionStatus("Transfer in progress ... ");
 
-    TaskMaster.deployed()
+    AuctionTokenTaskMaster.deployed()
       .then(function(taskMasterInstance) {
        
         return taskMasterInstance.approve(toaddress, document.getElementById("todoCoinReward").value, {
@@ -204,7 +211,7 @@ window.TaskMasterApp = {
     var tokenAmount = document.getElementById("tokenAmount").value;
     var doer = document.getElementById("doer").value;
 
-    TaskMaster.deployed().then(function(contractInstance){
+    AuctionTokenTaskMaster.deployed().then(function(contractInstance){
       return contractInstance.mint(tokenAmount, {
         from: doer
       });
@@ -218,7 +225,7 @@ window.TaskMasterApp = {
     var tokenAmount = document.getElementById("tokenAmount").value;
     var doer = document.getElementById("doer").value;
 
-    TaskMaster.deployed().then(function(contractInstance){
+    AuctionTokenTaskMaster.deployed().then(function(contractInstance){
       return contractInstance.burn(tokenAmount, {
         from: doer
       });
@@ -234,7 +241,7 @@ window.TaskMasterApp = {
 
     this.updateTransactionStatus("Transaction in progress ... ");
 
-    web3.eth.sendTransaction({from: doer, to: contractAddress, value: web3.toWei(todoCoinReward, 'ether')  },function(error, result) {
+    web3.eth.sendTransaction({from: doer, to: contractAddressToken, value: web3.toWei(todoCoinReward, 'ether')  },function(error, result) {
       if (err)
           alert("Smart contract call failed: " + err);
       else {
