@@ -47,6 +47,9 @@ contract AuctionBidding {
     }*/
     
     function transferAuctionToken(address to, uint256 value) public payable returns (bool) {
+        address tmpFrom = msg.sender;
+        //address tmpTo = to;
+        
         bool status = ftbcToken.transferFrom(msg.sender,to ,value);
         return status;
     }
@@ -89,13 +92,13 @@ contract AuctionBidding {
     Announce the winner and deactivate auction
     Need help - how to enable cross contract communication
     */
-    function announceWinnerForAuction(uint256 auctionId) public onlyAdmin returns (string, uint256) {
+    function announceWinnerForAuction(uint256 auctionId) public onlyAdmin returns (address, uint256) {
         AuctionHighestBidder storage bidder = auctionHighestBidder[auctionId];
         //Deduct coin amount from his wallet..
         //learn how to delete bid from system -- To do: take help from mentor
        // auctionHighestBidder[auctionId] = 0; 
         //auctionBidsByUserList[auctionId] = 0;
-        return (toString(bidder.highestBidder), bidder.highestBidValue);
+        return (bidder.highestBidder, bidder.highestBidValue);
     }
     
     //how to clear auction from map or disable auction..
@@ -117,12 +120,6 @@ contract AuctionBidding {
     function getContractBalance() public constant returns (uint256) {
         return address(this).balance;
     }
-    
-    function toString(address x) returns (string) {
-    bytes memory b = new bytes(20);
-    for (uint i = 0; i < 20; i++)
-        b[i] = byte(uint8(uint(x) / (2**(8*(19 - i)))));
-    return string(b);
-}
+
 
 }

@@ -1,10 +1,12 @@
 import { default as Web3} from 'web3';
 import { default as contract } from 'truffle-contract'
-import AuctionBiddingArtifacts from 'C:/blockchain/auction-app-dev/auction-code/final/build/contracts/AuctionBidding.json'
-import AuctionTokenArtifacts from 'C:/blockchain/auction-app-dev/auction-code/final/build/contracts/XYZToken.json'
+import AuctionBiddingArtifacts from '../../build/contracts/AuctionBidding.json'
+import AuctionTokenArtifacts from '../../build/contracts/XYZToken.json'
 
 var AuctionBiddingTaskMaster = contract(AuctionBiddingArtifacts);
+//var AuctionBiddingTaskMaster = "0x0294992174f59effa201fd297a1935ab246401be";
 var AuctionTokenTaskMaster = contract(AuctionTokenArtifacts);
+//var AuctionTokenTaskMaster = "0x3da00428ac6fecf99c05e303c7462097960af09d";
 var ownerAccount = "0x78e45c14db8fc1de08d7589a9999bfa49956f66e";
 var contractAddressToken; //"0x971d0118903c87ee9b0dd21a6d2d505a5ac2f234";
 var contractAddressBidding; 
@@ -14,15 +16,17 @@ var contractAbi;
 window.TaskMasterApp = {
   setWeb3Provider: function() {
     AuctionBiddingTaskMaster.setProvider(web3.currentProvider);
-    AuctionBiddingTaskMaster.deployed().then(function(instance){contractAddressBidding = instance.address});
-
-  },
-  setWeb3TokenProvider: function() {
     AuctionTokenTaskMaster.setProvider(web3.currentProvider);
+    AuctionBiddingTaskMaster.deployed().then(function(instance){contractAddressBidding = instance.address});
     AuctionTokenTaskMaster.deployed().then(function(instance){contractAddressToken = instance.address});
+  },
+
+ /*  setWeb3TokenProvider: function() {
+    AuctionTokenTaskMaster.setProvider(web3.currentProvider);
+    //AuctionTokenTaskMaster.deployed().then(function(instance){contractAddressToken = instance.address});
 
   },
-  
+ */ 
   updateTransactionStatus: function(statusMessage) {
     document.getElementById("transactionStatus").innerHTML = statusMessage;
   },
@@ -37,7 +41,7 @@ window.TaskMasterApp = {
           from: ownerAccount
         });
       }).then(function(value) {
-       
+alert(value);
         document.getElementById("accountBalance").innerHTML = web3.fromWei(value, 'ether');
         document.getElementById("accountBalance").style.color = "white";
       }).catch(function(e) {
@@ -74,7 +78,15 @@ window.TaskMasterApp = {
       var bidder = document.getElementById("bidder").value;
       var auctionId = document.getElementById("auctionId").value;
       var bidValue = document.getElementById("bidValue").value;
+      //bidValue = Math.pow(10,18)*bidValue;
+
+      //var bigNumber = new BigNumber(bidValue);
+
+      //alert("Bignumber -> "+ bigNumber);
+    //  var testvalue = web3.fromWei(bidValue, 'ether');
       alert(bidder);
+      alert(bidValue);
+      //alert(testvalue);
       return taskMasterInstance.saveUserBidForAuction(auctionId, bidValue, {
         from: bidder,
         gas:3000000
@@ -96,7 +108,9 @@ window.TaskMasterApp = {
         gas:100000
       });
     }).then(function(highestBidder) {
+      highestBidder =  web3.fromWei(highestBidder, 'ether');
       alert(highestBidder);
+
       document.getElementById("accountBalance").innerHTML = highestBidder; 
       document.getElementById("accountBalance").style.color = "white";
       //document.getElementById("highestBidder").value = highestBidder[0];
@@ -188,13 +202,14 @@ window.TaskMasterApp = {
     var todoCoinReward = +document.getElementById("todoCoinReward").value;
     var doer = document.getElementById("doer").value;
     var toaddress = document.getElementById("toaddress").value;
-
+    todoCoinReward = Math.pow(10,18)*todoCoinReward;
+    alert(todoCoinReward);
     this.updateTransactionStatus("Transfer in progress ... ");
 
     AuctionTokenTaskMaster.deployed()
       .then(function(taskMasterInstance) {
        
-        return taskMasterInstance.approve(toaddress, document.getElementById("todoCoinReward").value, {
+        return taskMasterInstance.approve(toaddress, todoCoinReward, {
           from: doer
         });
       }).then(function() {

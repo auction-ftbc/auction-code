@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>FTBC Token Dapp</title>
+  <title>Burn</title>
   <link rel="stylesheet" 
     href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"/>
   <script src="./app.js"></script>
 </head>
 <script>
 window.addEventListener('load', function() {
-  window.web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+  window.web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:7545"));
   TaskMasterApp.setWeb3Provider();
   //TaskMasterApp.getAccounts();
 });
