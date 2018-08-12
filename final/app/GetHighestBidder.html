@@ -5,6 +5,12 @@
   <link rel="stylesheet" 
     href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"/>
   <script src="./app.js"></script>
+  <style>
+      body 
+      {
+          background-color: rgb(145, 196, 238);
+      }
+  </style>
 </head>
 <script>
 window.addEventListener('load', function() {
@@ -14,18 +20,21 @@ window.addEventListener('load', function() {
 });
 </script>
 <body class="sans-serif pa4">
+<h1><a href="landing.html">
+    <img src="FTBC Icon.png" alt="FTBC Auction" width="250" height="100"></a></h1>
 <div class="absolute right-1 top-1 tc pt4 left f5 pb3 bg-black-80 w40 
-     h4 shadow-2 br4 white">Your Bid
+     h4 shadow-2 br4 blue">Winner Bid
     <div class="f3 mt3">
       <span id="accountBalance" class="b"></span>
-      Ethers
+      FTBC Tokens
     </div>
   </div>
-<div class="tc f2 mt6 near-black">Please enter auction id to get the highest bidder addrress </div>
+<div class="tc f2 mt6 near-black">Please enter auction id to get the highest bidder </div>
  <div class="pa4 mt4 bg-white shadow-1 br2 tc mw7 center w80">
-   <div class="f3 dark-green">Highest Bidder Details</div>
+   <div class="f3 dark-green">Auction Id</div>
    <form class="pt3 pb4 ph5-l black-60">
      <fieldset class="ba b--transparent ph0 mh0">
+       <!--
         <div class="mt3 ph3 pa0-l">
             <input
               class="pa3 input-reset ba b--black-30 br2 bg-white-smoke w-
@@ -33,14 +42,16 @@ window.addEventListener('load', function() {
               type="text"
               id="doer"
               placeholder="Enter your address">
+        -->      
         <div class="mt3 ph3 pa0-l">
             <input
               class="pa3 input-reset ba b--black-30 br2 bg-white-smoke w-
                      100"
               type="text"
               id="auctionId"
-              placeholder="Auction ID">
+              placeholder="Auction Id">
         </div>
+        <!--
        <div class="mt3 ph3 pa0-l">
          <input
            class="pa3 input-reset ba b--black-30 br2 bg-white-smoke w-
@@ -49,12 +60,17 @@ window.addEventListener('load', function() {
            id="highestBidder"
            placeholder="HighestBidder address displayed here">
        </div>
+       -->
      </fieldset>
    </form>
    <button
-     class="white pa3 ph4 bg-green br2 f3 b pointer" onclick="TaskMasterApp.getHighestBidder()">->
+     class="white pa3 ph4 bg-green br2 f3 b pointer" onclick="TaskMasterApp.getHighestBidder()">Submit
    </button>
 </div>
 <div id="transactionStatus" class="pt4"></div>
 </body>
+<br>
+<div>
+<footer><center>Team 3 Blockchain Project Bangalore</center></footer>
+</div>
 </html>

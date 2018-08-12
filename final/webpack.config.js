@@ -20,7 +20,8 @@ module.exports = {
       { from: './app/mint.html', to: "mint.html" },
       { from: './app/GetBalance.html', to: "GetBalance.html" },
       { from: './app/burn.html', to: "burn.html" },
-      { from: './app/bidding.html', to: "bidding.html" }
+      { from: './app/bidding.html', to: "bidding.html" },
+      { from: './app/landing.html', to: "landing.html" }
     ])
   ],
   module: {

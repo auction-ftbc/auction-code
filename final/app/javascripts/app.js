@@ -40,12 +40,12 @@ window.TaskMasterApp = {
         from: ownerAccount
       });
     }).then(function() {
-      self.updateTransactionStatus("Authorization complete!");
-      self.refreshAccountBalance();
+      console.log("completed");
+     // self.refreshAccountBalance();
 
     }).catch(function(e) {
       console.log(e);
-      self.updateTransactionStatus("Error Authorizing - see console.");
+    //  self.updateTransactionStatus("Error Authorizing - see console.");
     });
   },
 
@@ -69,12 +69,11 @@ window.TaskMasterApp = {
           from: ownerAccount
         });
       }).then(function(value) {
-alert(value);
         document.getElementById("accountBalance").innerHTML = web3.fromWei(value, 'ether');
         document.getElementById("accountBalance").style.color = "white";
       }).catch(function(e) {
         console.log(e);
-        self.updateTransactionStatus("Error getting account balance; see console.");
+        //self.updateTransactionStatus("Error getting account balance; see console.");
       });
   },
 
@@ -112,15 +111,15 @@ alert(value);
 
       //alert("Bignumber -> "+ bigNumber);
     //  var testvalue = web3.fromWei(bidValue, 'ether');
-      alert(bidder);
-      alert(bidValue);
+     // alert(bidder);
+     // alert(bidValue);
       //alert(testvalue);
       return taskMasterInstance.saveUserBidForAuction(auctionId, bidValue, {
         from: bidder,
         gas:3000000
       });
     }).then(function(value){
-      alert(value);
+      //alert(value);
       self.updateTransactionStatus("Bidding Completed");
     });
   },
@@ -129,16 +128,15 @@ alert(value);
     var self = this;
     AuctionBiddingTaskMaster.deployed()
     .then(function(taskMasterInstance) {
-      var address = document.getElementById("doer").value;
+      //var address = document.getElementById("doer").value;
       var auctionId = document.getElementById("auctionId").value;
       return taskMasterInstance.getHighestBidderByAuctionId(auctionId, {
-        from: address,
+        from: contractAddressBidding,
         gas:100000
       });
     }).then(function(highestBidder) {
       highestBidder =  web3.fromWei(highestBidder, 'ether');
-      alert(highestBidder);
-
+      alert("Highest Bid for auction: " + highestBidder);
       document.getElementById("accountBalance").innerHTML = highestBidder; 
       document.getElementById("accountBalance").style.color = "white";
       //document.getElementById("highestBidder").value = highestBidder[0];
@@ -296,7 +294,7 @@ alert(value);
             from: doer
           });
         }).then(function() {
-          self.updateTransactionStatus("Authorization complete!");
+          //self.updateTransactionStatus("Authorization complete!");
           self.refreshAccountBalance();
   
         }).catch(function(e) {

@@ -5,6 +5,12 @@
   <link rel="stylesheet" 
     href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"/>
   <script src="./app.js"></script>
+  <style>
+      body 
+      {
+          background-color: rgb(145, 196, 238);
+      }
+  </style>
 </head>
 <script>
 window.addEventListener('load', function() {
@@ -14,8 +20,10 @@ window.addEventListener('load', function() {
 });
 </script>
 <body class="sans-serif pa4">
+<h1><a href="landing.html">
+    <img src="FTBC Icon.png" alt="FTBC Auction" width="250" height="100"></a></h1>
 <div class="absolute right-1 top-1 tc pt4 left f5 pb3 bg-black-80 w40 
-     h4 shadow-2 br4 white">You have
+     h4 shadow-2 br4 blue">You have
     <div class="f3 mt3">
       <span id="accountBalance" class="b"></span>
       FTBC Token
@@ -32,14 +40,18 @@ window.addEventListener('load', function() {
                   100"
            type="text"
            id="doer"
-           placeholder="Address">
+           placeholder="Your Address">
        </div>
      </fieldset>
    </form>
    <button
-     class="white pa3 ph4 bg-green br2 f3 b pointer" onclick="TaskMasterApp.getAccounts()">->
+     class="white pa3 ph4 bg-green br2 f3 b pointer" onclick="TaskMasterApp.getAccounts()">Submit
    </button>
 </div>
 <div id="transactionStatus" class="pt4"></div>
 </body>
+<br>
+<div>
+<footer><center>Team 3 Blockchain Project Bangalore</center></footer>
+</div>
 </html>
