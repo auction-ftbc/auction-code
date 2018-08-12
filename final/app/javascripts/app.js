@@ -19,6 +19,34 @@ window.TaskMasterApp = {
     AuctionTokenTaskMaster.setProvider(web3.currentProvider);
     AuctionBiddingTaskMaster.deployed().then(function(instance){contractAddressBidding = instance.address});
     AuctionTokenTaskMaster.deployed().then(function(instance){contractAddressToken = instance.address});
+    var self = this;
+    web3.eth.getAccounts( function(error, accounts) {
+      if (error != null) {
+        alert("Sorry, something went wrong. We couldn't fetch your accounts.");
+        return;
+      }
+
+      if (!accounts.length) {
+        alert("Sorry, no errors, but we couldn't get any accounts - Make sure your Ethereum client is configured correctly.");
+        return;
+      }
+      ownerAccount = accounts[0];
+    });
+    var tokenInwei =  web3.toWei(500, 'ether');
+    AuctionTokenTaskMaster.deployed()
+    .then(function(taskMasterInstance) {
+     
+      return taskMasterInstance.approve(contractAddressBidding, tokenInwei, {
+        from: ownerAccount
+      });
+    }).then(function() {
+      self.updateTransactionStatus("Authorization complete!");
+      self.refreshAccountBalance();
+
+    }).catch(function(e) {
+      console.log(e);
+      self.updateTransactionStatus("Error Authorizing - see console.");
+    });
   },
 
  /*  setWeb3TokenProvider: function() {
@@ -78,7 +106,7 @@ alert(value);
       var bidder = document.getElementById("bidder").value;
       var auctionId = document.getElementById("auctionId").value;
       var bidValue = document.getElementById("bidValue").value;
-      //bidValue = Math.pow(10,18)*bidValue;
+      bidValue = Math.pow(10,18)*bidValue;
 
       //var bigNumber = new BigNumber(bidValue);
 
@@ -257,17 +285,34 @@ alert(value);
     this.updateTransactionStatus("Transaction in progress ... ");
 
     web3.eth.sendTransaction({from: doer, to: contractAddressToken, value: web3.toWei(todoCoinReward, 'ether')  },function(error, result) {
-      if (err)
-          alert("Smart contract call failed: " + err);
+      if (error)
+          alert("Smart contract call failed: " + error);
       else {
-          contract.balanceOf(document.getElementById("doer").value, function(err, result) {
+        var tokenInwei =  web3.toWei(todoCoinReward, 'ether');
+        AuctionTokenTaskMaster.deployed()
+        .then(function(taskMasterInstance) {
+         
+          return taskMasterInstance.approve(contractAddressBidding, tokenInwei, {
+            from: doer
+          });
+        }).then(function() {
+          self.updateTransactionStatus("Authorization complete!");
+          self.refreshAccountBalance();
+  
+        }).catch(function(e) {
+          console.log(e);
+          self.updateTransactionStatus("Error Authorizing - see console.");
+        });
+        AuctionTokenTaskMaster.deployed()
+        .then(function(taskMasterInstance) {  
+          return taskMasterInstance.balanceOf(document.getElementById("doer").value, function(err, result) {
           if (err)
             alert("Smart contract call failed: " + err);
           else {                        
             document.getElementById("accountBalance").innerHTML = result.toFixed(0);
             document.getElementById("accountBalance").style.color = "white";
           }
-               
+        });     
         });     
                         
       }

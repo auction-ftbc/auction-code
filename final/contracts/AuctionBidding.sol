@@ -16,7 +16,9 @@ contract AuctionBidding {
     
     function AuctionBidding(address ftbcTokenAddress) {
         ftbcToken = XYZToken(ftbcTokenAddress);
-        auctionOwner = msg.sender; 
+        auctionOwner = msg.sender;
+      //  address contract_Address = address(this);
+       // ftbcToken.approve(auctionOwner,contract_Address);
     }
     
     modifier onlyAdmin () {
@@ -59,12 +61,12 @@ contract AuctionBidding {
     
     //If the bidder amount is high, release the token of last bidder
     //Approval function implementation and transfer from using msg.sender
-    function saveUserBidForAuction(uint256 auctionId, uint256 bidValue) public returns (uint256) {
+  function saveUserBidForAuction(uint256 auctionId, uint256 bidValue) public returns (uint256) {
         AuctionHighestBidder bidder = auctionHighestBidder[auctionId];
         if (bidder.highestBidValue < bidValue) {
             AuctionHighestBidder lastBidder = bidder;
             //release tokens for him
-           // this.releaseAuctionTokens(auctionOwner, lastBidder.highestBidder, lastBidder.highestBidValue);
+            releaseAuctionTokens(auctionOwner, lastBidder.highestBidder, lastBidder.highestBidValue);
             bidder.highestBidValue = bidValue;
             bidder.highestBidder = msg.sender;
             bidder.active = true;
@@ -76,7 +78,7 @@ contract AuctionBidding {
     }
     
     function releaseAuctionTokens(address from, address to, uint256 value) public payable returns (bool) {
-        bool status = ftbcToken.transferBetweenAccounts(from, to, value);
+        bool status = ftbcToken.transferFrom(from, to, value);
         return status;
     }
     /*
