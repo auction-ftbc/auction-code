@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Token Buy</title>
+  <link rel="stylesheet" 
+    href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"/>
+  <script src="./app.js"></script>
+  <style>
+      body 
+      {
+          background-color: rgb(145, 196, 238);
+      }
+  </style>
+  <link rel="shortcut icon" type="image/png" href="./FTBC Icon.png"/>
+</head>
+<script>
+window.addEventListener('load', function() {
+  window.web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:7545"));
+  TaskMasterApp.setWeb3Provider();
+  //TaskMasterApp.getAccounts();
+});
+</script>
+<body class="sans-serif pa4">
+<!--<h1><center>FTBC Auction</center></h1>-->
+<h1><a href="landing.html">
+<img src="FTBC Icon.png" alt="FTBC Auction" width="250" height="100"></a></h1>
+<div class="absolute right-1 top-1 tc pt4 left f5 pb3 bg-black-80 w40 
+     h4 shadow-2 br4 blue">You have
+    <div class="f3 mt3">
+      <span id="accountBalance" class="b"></span>
+      FTBC Tokens
+    </div>
+  </div>
+<div class="tc f2 mt6 near-black">Buy FTBC tokens from store</div>
+ <div class="pa4 mt4 bg-white shadow-1 br2 tc mw7 center">
+   <form class="pt3 pb4 ph5-l black-60">
+     <fieldset class="ba b--transparent ph0 mh0">
+       <div class="mt3 ph3 pa0-l">
+         <input
+           class="pa3 input-reset ba b--black-30 br2 bg-white-smoke w-
+                 100"
+           type="number"
+           id="todoCoinReward"
+           placeholder="Amount in Ethers">
+       </div>
+       <div class="mt3 ph3 pa0-l">
+         <input
+           class="pa3 input-reset ba b--black-30 br2 bg-white-smoke w-
+                  100"
+           type="text"
+           id="doer"
+           placeholder="Your Address">
+       </div>
+     </fieldset>
+   </form>
+   <button
+     class="white pa3 ph4 bg-green br2 f3 b pointer" onclick="TaskMasterApp.buyToken()">Submit
+   </button>
+</div>
+<div id="transactionStatus" class="pt4"></div>
+</body>
+<br>
+<div>
+<footer><center>Team 3 Blockchain Project Bangalore</center></footer>
+</div>
+</html>

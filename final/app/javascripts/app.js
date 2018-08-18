@@ -287,6 +287,7 @@ window.TaskMasterApp = {
           alert("Smart contract call failed: " + error);
       else {
         var tokenInwei =  web3.toWei(todoCoinReward, 'ether');
+        tokenInwei = tokenInwei*10;
         AuctionTokenTaskMaster.deployed()
         .then(function(taskMasterInstance) {
          

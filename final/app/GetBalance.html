@@ -4,6 +4,7 @@
   <title>Get Balance</title>
   <link rel="stylesheet" 
     href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"/>
+	<link rel="stylesheet" type="text/css" href="app/stylesheets/authorize.css">
   <script src="./app.js"></script>
   <style>
       body 
@@ -19,24 +20,24 @@ window.addEventListener('load', function() {
   //TaskMasterApp.getAccounts();
 });
 </script>
-<body class="sans-serif pa4">
+<body class="sans-serif container-background pa4">
 <h1><a href="landing.html">
-    <img src="FTBC Icon.png" alt="FTBC Auction" width="250" height="100"></a></h1>
-<div class="absolute right-1 top-1 tc pt4 left f5 pb3 bg-black-80 w40 
-     h4 shadow-2 br4 blue">You have
+    <img class="ftbc-padding" src="app/images/FTBCIcon.png" alt="FTBC Auction" width="250" height="100"></a></h1>
+<div class="absolute token-padding-right token right-1 top-1 tc pt4 left f5 pb3 bg-black-80 w40 
+     h4 shadow-2 br4 white">You have
     <div class="f3 mt3">
       <span id="accountBalance" class="b"></span>
       FTBC Token
     </div>
   </div>
-<div class="tc f2 mt6 near-black">Please enter your address to get FTBC token balance </div>
- <div class="pa4 mt4 bg-white shadow-1 br2 tc mw7 center w80">
-   <div class="f3 dark-green">Your address</div>
+<div class="tc f2 mt6 near-black margin-padding margin-top-getBalance white-text">Please enter your address to get FTBC token balance </div>
+ <div class="pa4 mt4 bg-white container-border shadow-1 br2 tc mw7 center w80">
+   <div class="f3 text-color">Your address</div>
    <form class="pt3 pb4 ph5-l black-60">
      <fieldset class="ba b--transparent ph0 mh0">
        <div class="mt3 ph3 pa0-l">
          <input
-           class="pa3 input-reset ba b--black-30 br2 bg-white-smoke w-
+           class="pa3 input-text b--black-30 br2 bg-white-smoke w-
                   100"
            type="text"
            id="doer"
@@ -45,7 +46,7 @@ window.addEventListener('load', function() {
      </fieldset>
    </form>
    <button
-     class="white pa3 ph4 bg-green br2 f3 b pointer" onclick="TaskMasterApp.getAccounts()">Submit
+     class="white btn-style pa3 ph4 bg-green br2 f3 b pointer" onclick="TaskMasterApp.getAccounts()">Submit
    </button>
 </div>
 <div id="transactionStatus" class="pt4"></div>

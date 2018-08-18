@@ -5,6 +5,7 @@
   <title>Bidding</title>
   <link rel="stylesheet" 
     href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"/>
+	<link rel="stylesheet" type="text/css" href="app/stylesheets/authorize.css">
   <script src="./app.js"></script>
   <style>
       body 
@@ -20,17 +21,17 @@ window.addEventListener('load', function() {
   //TaskMasterApp.getAccounts();
 });
 </script>
-<body class="sans-serif pa4">
+<body class="sans-serif container-background pa4">
 <h1><a href="landing.html">
-    <img src="FTBC Icon.png" alt="FTBC Auction" width="250" height="100"></a></h1>
-<div class="tc f2 mt6 near-black">Please provide your bid details for bidding</div>
- <div class="pa4 mt4 bg-white shadow-1 br2 tc mw7 center">
-   <div class="f3 dark-green">Bidding Details</div>
+    <img class="ftbc-padding" src="app/images/FTBCIcon.png" alt="FTBC Auction" width="250" height="100"></a></h1>
+<div class="tc f2 mt6 near-black margin-padding white-text-with-padding">Please provide your bid details for bidding</div>
+ <div class="pa4 mt4 bg-white box-container shadow-1 br2 tc mw7 center">
+   <div class="f3 text-color">Bidding Details</div>
    <form class="pt3 pb4 ph5-l black-60">
      <fieldset class="ba b--transparent ph0 mh0">
        <div class="mt3 ph3 pa0-l">
          <input
-           class="pa3 input-reset ba b--black-30 br2 bg-white-smoke w-
+           class="pa3 input-text b--black-30 br2 bg-white-smoke w-
                  100"
            type="number"
            id="bidValue"
@@ -38,7 +39,7 @@ window.addEventListener('load', function() {
        </div>
        <div class="mt3 ph3 pa0-l">
          <input
-           class="pa3 input-reset ba b--black-30 br2 bg-white-smoke w-
+           class="pa3 input-text b--black-30 br2 bg-white-smoke w-
                   100"
            type="text"
            id="bidder"
@@ -46,7 +47,7 @@ window.addEventListener('load', function() {
        </div>
        <div class="mt3 ph3 pa0-l">
         <input
-          class="pa3 input-reset ba b--black-30 br2 bg-white-smoke w-
+          class="pa3 input-text b--black-30 br2 bg-white-smoke w-
                  100"
           type="text"
           id="auctionId"
@@ -55,7 +56,7 @@ window.addEventListener('load', function() {
      </fieldset>
    </form>
    <button
-     class="white pa3 ph4 bg-green br2 f3 b pointer" onclick="TaskMasterApp.saveBidding()">Submit
+     class="white btn-style pa3 ph4 bg-green br2 f3 b pointer" onclick="TaskMasterApp.saveBidding()">Submit
    </button>
 </div>
 <div id="transactionStatus" class="pt4"></div>

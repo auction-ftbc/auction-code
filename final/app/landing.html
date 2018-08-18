@@ -1,53 +1,109 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>E-Auction</title>
-  <link rel="stylesheet" 
-    href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"/>
-  <script src="./app.js"></script>
-  <style>
-      body 
-      {
-          background-color: rgb(145, 196, 238);
-      }
-  </style>
+    <title>E-Auction</title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css" />
+    <link rel="stylesheet" type="text/css" href="app/stylesheets/authorize.css">
+    <script src="./app.js"></script>
+    <style>
+        body {
+            background-color: rgb(145, 196, 238);
+        }
+
+        #logout {
+            float: right;
+            padding: 20px;
+        }
+
+        .btn-style {
+            width: 100%;
+            border-radius: 19px;
+            background: #225B5A;
+        }
+    </style>
 </head>
-<script>
-</script>
-<body>
-  <h1><img src="FTBC Icon.png" alt="FTBC Auction" width="250" height="100"></a></h1>
-  <h2><a href="index.html">LogOff</a></h2>
-  <div class="tl f4 mt2 near-black">  	
-        <b>Token Services</b>
-  </div> 
-  <hr/>
-  <div class="pa4 mt2 bg-white shadow-1 br2 tc mw7 center"> 
-    <input class="white pa1 ph4 bg-green br2 f5 b pointer" 
-           type="button" value="Buy Token" id="buytoken" onclick="location.href='buy.html'"/><br><br>
-    <input class="white pa1 ph4 bg-green br2 f5 b pointer" 
-           type="button" value="Balance Token" id="balancetoken" onclick="location.href='GetBalance.html'"/>
-  </div>
-  <hr/>
-  <div class="tl f4 mt2 near-black">  	
-        <b>Auction Services</b></div></div>
-  </div> 
-  <hr/>
-  <div class="pa4 mt2 bg-white shadow-1 br2 tc mw7 center"> 
-    <input class="white pa1 ph4 bg-green br2 f5 b pointer" 
-           type="button" value="Create Auction" id="placeauction"/><br><br>
-    <input class="white pa1 ph4 bg-green br2 f5 b pointer" 
-           type="button" value="List My Auctions" id="listauctions"/><br><br>      
-    <input class="white pa1 ph4 bg-green br2 f5 b pointer" 
-           type="button" value="Place Bid" id="bidding" onclick="location.href='bidding.html'"/><br><br>
-    <input class="white pa1 ph4 bg-green br2 f5 b pointer" 
-           type="button" value="List My Bids" id="listbids"/><br><br> 
-    <input class="white pa1 ph4 bg-green br2 f5 b pointer" 
-           type="button" value="Bid Winner" id="bidwinner" onclick="location.href='GetHighestBidder.html'"/>
-  </div>
-  <hr/>
-  </body>
-  <br>
-  <div>
-  <footer><center>Team 3 Blockchain Project Bangalore</center></footer>
-  </div>
+
+<body class="container-background">
+    <div style="background-color: white">
+        <a>
+            <img class="ftbc-padding image-margin" src="app/images/FTBCIcon.png" alt="FTBC Auction" width="250" height="100">
+        </a>
+        <a id="logout" href="index.html">
+            <h2>LogOff</h2>
+        </a>
+    </div>
+    <hr/>
+
+    <div class="tl f4 mt2 near-black">
+        <center>
+            <b>Token Services</b>
+        </center>
+    </div>
+    <hr/>
+    <div class="pa4 container-border mt2 bg-white shadow-1 br2 tc mw7 center">
+        <center>
+            <table>
+                <tr>
+                    <td>
+                        <input class="white btn-style pa1 ph4 bg-green br2 f5 b pointer" style="margin-right: 20px;width: 200px; padding: 10px;"
+                            type="button" value="Buy Token" id="buytoken" onclick="location.href='buy.html'" />
+                    </td>
+                    <td>
+                        <input class="white btn-style pa1 ph4 bg-green br2 f5 b pointer" style="margin-left: 20px; width: 200px; padding: 10px;"
+                            type="button" value="Balance Token" id="balancetoken" onclick="location.href='GetBalance.html'" />
+                    </td>
+                </tr>
+            </table>
+            <center>
+
+    </div>
+    <hr/>
+    <div class="tl f4 mt2 near-black">
+        <center>
+            <b>Auction Services</b>
+        </center>
+    </div>
+    </div>
+    </div>
+    <hr/>
+    <div class="pa4 container-border mt2 bg-white shadow-1 br2 tc mw7 center">
+        <center>
+            <table>
+                <tr>
+                    <td>
+                        <input class="white btn-style pa1 ph4 bg-green br2 f5 b pointer" style="margin-right: 20px;width: 200px; padding: 10px;"
+                            type="button" value="Create Auction" id="placeauction" />
+                    </td>
+                    <td>
+                        <input class="white btn-style pa1 ph4 bg-green br2 f5 b pointer" style="margin-left: 20px; width: 200px; padding: 10px;"
+                            type="button" value="List My Auctions" id="listauctions" />
+                    </td>
+                </tr>
+                <br>
+                <tr>
+                    <td>
+                        <input class="white btn-style pa1 ph4 bg-green br2 f5 b pointer" style="margin-right: 20px;width: 200px; padding: 10px;"
+                            type="button" value="Place Bid" id="bidding" onclick="location.href='bidding.html'" />
+                    </td>
+                    <td>
+                        <input class="white btn-style pa1 ph4 bg-green br2 f5 b pointer" style="margin-left: 20px; width: 200px; padding: 10px;"
+                            type="button" value="List My Bids" id="listbids" />
+                    </td>
+                </tr>
+            </table>
+            <center>
+                <br>
+                <input class="white btn-style pa1 ph4 bg-green br2 f5 b pointer" style="margin-right: 20px;width: 200px; padding: 10px;"
+                    type="button" value="Bid Winner" id="bidwinner" onclick="location.href='GetHighestBidder.html'" />
+    </div>
+    <hr/>
+</body>
+<br>
+<div>
+    <footer>
+        <center>Team 3 Blockchain Project Bangalore</center>
+    </footer>
+</div>
+
 </html>
